@@ -31,11 +31,12 @@ public class Global {
 
             // find K random int except i, then insert the array
             for (int j = 0; j < K; j ++) {
-                //random select 1~N but j
+                //random select 1~N but i
                 int tmp = rand.nextInt(N);
-                final int tmp_ = tmp;
-                while (Arrays.stream(intrctList_item).anyMatch(Integer.valueOf(tmp)::equals) || tmp == i) {
-                    tmp = rand.nextInt(N);
+		for (int k = 0; k < j; k ++) {
+		    //while (Arrays.stream(intrctList_item).anyMatch(Integer.valueOf(tmp)::equals) || tmp == i) {
+		    while (intrctList_item[k] == tmp || tmp == i)
+			tmp = rand.nextInt(N);
                 }
                 intrctList_item[j] = tmp;
             }

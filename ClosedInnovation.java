@@ -1,5 +1,5 @@
 import java.util.*;
-import java.util.stream.*;
+//import java.util.stream.*;
 import java.io.*;
 
 public class ClosedInnovation {
@@ -115,7 +115,11 @@ public class ClosedInnovation {
     
     public void writeResult(String FileName) {
         //String result = Arrays.toString(performanceList);
-        double result = DoubleStream.of(performanceList).sum()/(Global.contributionNum * Global.interactionNum);
+	int length = Global.contributionNum * Global.interactionNum;
+	double result = 0;
+	for (int i = 0; i < length; i ++)
+	    result += performanceList[i];
+	result /= length;
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(FileName + ".csv", true));
             bw.write("K = "+ Global.K + "\n");
