@@ -1,31 +1,13 @@
 import java.util.*;
 
 public class Firms_alpha extends Firms {
-    public int[] featureLst = new int [ClosedInnovation.N/2];
+    public int[] featureLst = new int [Global.N/2];
     public Firms_beta partner;
     public Firms_beta[] partnerLst;
-    public double contributionLst[][];
 
-    /*
-    public void initial(Firms_beta randomPrtnr, double[][] contributionLst_out) {
+    public void initial(Firms_beta[] openFirms_beta, int partnerNum) {
         Random rand = new Random();
-        int N = ClosedInnovation.N;
-        for (int i = 0; i < N/2; i ++) {
-            featureLst[i] = rand.nextInt(2);
-        }
-        //System.out.println(Arrays.toString(featureLst)); //debug
-        
-        partner = randomPrtnr;
-        contributionLst = contributionLst_out;
-        //System.out.println(Arrays.toString(partner.featureLst)); //debug
-        WTP = calcWTP();
-    }
-    */
-
-    /**********remove contributionLst_out*/
-    public void initial(Firms_beta[] openFirms_beta, int partnerNum, double[][] contributionLst_out) {
-        Random rand = new Random();
-        int N = ClosedInnovation.N;
+        int N = Global.N;
         for (int i = 0; i < N/2; i ++) {
             featureLst[i] = rand.nextInt(2);
         }
@@ -33,19 +15,18 @@ public class Firms_alpha extends Firms {
         
         partnerLst = openFirms_beta;
         partner = partnerLst[partnerNum];
-        contributionLst = contributionLst_out;
         //System.out.println(Arrays.toString(partner.featureLst)); //debug
         WTP = calcWTP();
     }
 
     /**************************chnge all closed Class to Global class*/
     public double calcWTP () {
-        int N = ClosedInnovation.N; int K = ClosedInnovation.K;
+        int N = Global.N; int K = Global.K;
         int decimalNum = 0; double contributionSum = 0;
         for (int i = 0; i < N; i ++) {
 
-            decimalNum = bin2Dec(ClosedInnovation.intrctList[i], K, findValue(i));
-            contributionSum += contributionLst[i][decimalNum];
+            decimalNum = bin2Dec(Global.intrctList[i], K, findValue(i));
+            contributionSum += Global.contributionLst[i][decimalNum];
         }
         return contributionSum/N;
     }
@@ -59,7 +40,7 @@ public class Firms_alpha extends Firms {
     }
     
     public void search () {
-        for (int i = 0; i < ClosedInnovation.N/2; i++) {
+        for (int i = 0; i < Global.N/2; i++) {
             //revert one feature and compare WTP, then set flags
             revertBit(i);
             double oldWTP = WTP;

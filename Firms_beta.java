@@ -4,23 +4,9 @@ public class Firms_beta extends Firms_alpha {
     public Firms_alpha partner;
     public Firms_alpha[] partnerLst;
 
-    /*
-    public void initial(Firms_alpha randomPrtnr, double[][] contributionLst_out) {
+    public void initial(Firms_alpha[] openFirms_alpha, int partnerNum) {
         Random rand = new Random();
-        int N = ClosedInnovation.N;
-        for (int i = 0; i < N/2; i ++) {
-            featureLst[i] = rand.nextInt(2);
-        }
-        //System.out.println(Arrays.toString(featureLst)); //debug
-
-        partner = randomPrtnr;
-        contributionLst = contributionLst_out;
-        WTP = calcWTP();
-    }
-    */
-    public void initial(Firms_alpha[] openFirms_alpha, int partnerNum, double[][] contributionLst_out) {
-        Random rand = new Random();
-        int N = ClosedInnovation.N;
+        int N = Global.N;
         for (int i = 0; i < N/2; i ++) {
             featureLst[i] = rand.nextInt(2);
         }
@@ -28,7 +14,6 @@ public class Firms_beta extends Firms_alpha {
 
         partnerLst = openFirms_alpha;
         partner = partnerLst[partnerNum];
-        contributionLst = contributionLst_out;
         WTP = calcWTP();
     }
 

@@ -1,21 +1,29 @@
-public class Global {
-    public static int N = 16, K, firmsNum = 100;
+import java.util.*;
+import java.io.*;
 
-    public  static int[][] intrctList = new int[N][K];
-    public  static double[][] contributionLst = new double[N][(int) Math.pow(2, (K+1))];
-    public  static int landscapeNum = 50;
+public class Global {
+    public static int N = 16, K = 0, firmsNum = 100;
+
+    public static int[][] intrctList = new int[N][K];
+    public static double[][] contributionLst = new double[N][(int) Math.pow(2, (K+1))];
+
+    //number of landscapes
+    public static int contributionNum = 0;
+    public static int interactionNum = 0;
 
     public Global () {
-        System.out.println("input K:");
+        System.out.println("please input K, contribution matrix & interaction matrix numbers:");
         Scanner reader = new Scanner(System.in);
         K = reader.nextInt();
+        contributionNum = reader.nextInt();
+        interactionNum = reader.nextInt();
         
-        newInteractLst();
+        //newInteractLst();
     }
 
-    public static void newInteractLst() {
+    public static void newInteractLst(int rank) {
         //random 10000;
-        Random rand = new Random(10000);
+        Random rand = new Random(rank);
         for (int i = 0; i < N; i ++) {
 
             int[] intrctList_item = new int[K];
@@ -36,11 +44,11 @@ public class Global {
         }
     }
 
-    public static void newContributionLst(int landscapeNo) {
+    public static void newContributionLst(int rank) {
         //landscape construction
         //contributionLst, find 2^(K+1)
         //Change to Global method
-        Random rand = new Random(landscapeNo);
+        Random rand = new Random(rank);
         for (int i = 0; i < N; i ++) {
             
             double[] contributionLst_item = new double[(int) Math.pow(2, K+1)];

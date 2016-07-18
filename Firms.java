@@ -1,14 +1,14 @@
 import java.util.*;
 
 public class Firms {
-    public int[] featureLst = new int [ClosedInnovation.N];
+    public int[] featureLst = new int [Global.N];
     public int newPlanFnd = 0;
     public int newPlanIndctr = 0;
     public double WTP = 0;
 
     public void initial () { //firms iniitalisaztion: set initial feature list and flags
         Random rand = new Random();
-        int N = ClosedInnovation.N;
+        int N = Global.N;
         for (int i = 0; i < N; i ++) {
             featureLst[i] = rand.nextInt(2);
         }
@@ -19,12 +19,12 @@ public class Firms {
     }
 
     public double calcWTP () {
-        int N = ClosedInnovation.N; int K = ClosedInnovation.K;
+        int N = Global.N; int K = Global.K;
         int decimalNum = 0; double contributionSum = 0;
         for (int i = 0; i < N; i ++) {
 
-            decimalNum = bin2Dec(ClosedInnovation.intrctList[i], K, findValue(i));
-            contributionSum += ClosedInnovation.contributionLst[i][decimalNum];
+            decimalNum = bin2Dec(Global.intrctList[i], K, findValue(i));
+            contributionSum += Global.contributionLst[i][decimalNum];
             
         }
 
@@ -49,7 +49,7 @@ public class Firms {
     //utility functions end
 
     public void search () {
-        for (int i = 0; i < ClosedInnovation.N; i++) {
+        for (int i = 0; i < Global.N; i++) {
             //revert one feature and compare WTP, then set flags
             revertBit(i);
             double oldWTP = WTP;
