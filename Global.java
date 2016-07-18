@@ -11,12 +11,15 @@ public class Global {
     public static int contributionNum = 0;
     public static int interactionNum = 0;
 
-    public Global () {
-        System.out.println("please input K, contribution matrix & interaction matrix numbers:");
+    public Global (String param1, String param2, String param3) {
+        /*System.out.println("please input K, contribution matrix & interaction matrix numbers:");
         Scanner reader = new Scanner(System.in);
         K = reader.nextInt();
         contributionNum = reader.nextInt();
-        interactionNum = reader.nextInt();
+        interactionNum = reader.nextInt();*/
+	K = Integer.parseInt(param1);
+	contributionNum = Integer.parseInt(param2);
+	interactionNum = Integer.parseInt(param3);
         
         //newInteractLst();
     }
@@ -32,12 +35,18 @@ public class Global {
             // find K random int except i, then insert the array
             for (int j = 0; j < K; j ++) {
                 //random select 1~N but i
-                int tmp = rand.nextInt(N);
-		for (int k = 0; k < j; k ++) {
-		    //while (Arrays.stream(intrctList_item).anyMatch(Integer.valueOf(tmp)::equals) || tmp == i) {
-		    while (intrctList_item[k] == tmp || tmp == i)
-			tmp = rand.nextInt(N);
-                }
+                int tmp;
+
+		//while (Arrays.stream(intrctList_item).anyMatch(Integer.valueOf(tmp)::equals) || tmp == i) {
+		int sameFlag;
+		do {
+		    sameFlag = 0;
+		    tmp = rand.nextInt(N);
+		    for (int k = 0; k < j; k ++) {
+			if (intrctList_item[k] == tmp || tmp == i) {
+			    sameFlag = 1; break; }
+		    }
+                } while (sameFlag == 1);
                 intrctList_item[j] = tmp;
             }
             Arrays.sort(intrctList_item);
