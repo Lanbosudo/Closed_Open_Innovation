@@ -4,49 +4,9 @@ import java.io.*;
 
 public class ClosedInnovation {
 
-    /***********move to Global*//*
-    public static int N = 16, K, firmsNum = 100;
-
-    public  static int[][] intrctList = new int[N][K];
-    public  static double[][] contributionLst = new double[N][(int) Math.pow(2, (K+1))];
-    public  int landscapeNum = 50;
-    /*end*/
     public  double[] performanceList = new double[Global.contributionNum * Global.interactionNum];
     public String FileName = "Closed_Data";
     
-    public ClosedInnovation() {
-
-        /*************move to Global*//*
-        System.out.println("input K:");
-        Scanner reader = new Scanner(System.in);
-        K = reader.nextInt();
-        
-        //set up the two mapping matrixes; one below, the other in begin()
-
-        //random 10000;
-        Random rand = new Random(10000);
-        for (int i = 0; i < N; i ++) {
-
-            int[] intrctList_item = new int[K];
-            Arrays.fill(intrctList_item, -1);
-
-            // find K random int except i, then insert the array
-            for (int j = 0; j < K; j ++) {
-                //random select 1~N but j
-                int tmp = rand.nextInt(N);
-                final int tmp_ = tmp;
-                while (Arrays.stream(intrctList_item).anyMatch(Integer.valueOf(tmp)::equals) || tmp == i) {
-                    tmp = rand.nextInt(N);
-                }
-                intrctList_item[j] = tmp;
-            }
-            Arrays.sort(intrctList_item);
-            intrctList[i] = intrctList_item;
-        }
-        //System.out.println(Arrays.toString(intrctList[0])); //debug
-        /*end*/
-    }
-
     public void begin () {
         int N = Global.N, K = Global.K, firmsNum = Global.firmsNum;
         int contributionNum = Global.contributionNum, interactionNum = Global.interactionNum;
@@ -114,16 +74,16 @@ public class ClosedInnovation {
     }
     
     public void writeResult(String FileName) {
-        //String result = Arrays.toString(performanceList);
-	int length = Global.contributionNum * Global.interactionNum;
-	double result = 0;
-	for (int i = 0; i < length; i ++)
-	    result += performanceList[i];
-	result /= length;
+        String result = Arrays.toString(performanceList);
+        /*int length = Global.contributionNum * Global.interactionNum;
+          double result = 0;
+          for (int i = 0; i < length; i ++)
+          result += performanceList[i];
+          result /= length;*/
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(FileName + ".csv", true));
             bw.write("K = "+ Global.K + "\n");
-            bw.write(result/*.substring(1, result.length()-1)*/ + "\n");
+            bw.write(result.substring(1, result.length()-1) + "\n");
             bw.flush();
             bw.close();
         } catch (IOException e) {
