@@ -12,16 +12,10 @@ public class Global {
     public static int interactionNum = 0;
 
     public Global (String param1, String param2, String param3) {
-        /*System.out.println("please input K, contribution matrix & interaction matrix numbers:");
-        Scanner reader = new Scanner(System.in);
-        K = reader.nextInt();
-        contributionNum = reader.nextInt();
-        interactionNum = reader.nextInt();*/
-	K = Integer.parseInt(param1);
-	contributionNum = Integer.parseInt(param2);
-	interactionNum = Integer.parseInt(param3);
-        
-        //newInteractLst();
+
+        K = Integer.parseInt(param1);
+        contributionNum = Integer.parseInt(param2);
+        interactionNum = Integer.parseInt(param3);
     }
 
     public static void newInteractLst(int rank) {
@@ -37,16 +31,19 @@ public class Global {
                 //random select 1~N but i
                 int tmp;
 
-		//while (Arrays.stream(intrctList_item).anyMatch(Integer.valueOf(tmp)::equals) || tmp == i) {
-		int sameFlag;
-		do {
-		    sameFlag = 0;
-		    tmp = rand.nextInt(N);
-		    for (int k = 0; k < j; k ++) {
-			if (intrctList_item[k] == tmp || tmp == i) {
-			    sameFlag = 1; break; }
-		    }
+                //java 8 feature
+                //while (Arrays.stream(intrctList_item).anyMatch(Integer.valueOf(tmp)::equals) || tmp == i) {
+                int sameFlag;
+                do {
+                    sameFlag = 0;
+                    tmp = rand.nextInt(N);
+                    for (int k = 0; k < j; k ++) {
+                        if (intrctList_item[k] == tmp || tmp == i) {
+                            sameFlag = 1; break; }
+                    }
                 } while (sameFlag == 1);
+                
+                
                 intrctList_item[j] = tmp;
             }
             Arrays.sort(intrctList_item);
@@ -57,7 +54,6 @@ public class Global {
     public static void newContributionLst(int rank) {
         //landscape construction
         //contributionLst, find 2^(K+1)
-        //Change to Global method
         Random rand = new Random(rank);
         for (int i = 0; i < N; i ++) {
             

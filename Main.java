@@ -6,7 +6,7 @@ public class Main {
         /*System.out.println("select mode: (1)Closed (2)Open Fixed (3)Open Flexible");
         Scanner reader = new Scanner(System.in);
         int mode = reader.nextInt();*/
-	int mode = Integer.parseInt(args[0]);
+        int mode = Integer.parseInt(args[0]);
 
         Global global = new Global(args[1], args[2], args[3]);
         if (mode == 1) {
