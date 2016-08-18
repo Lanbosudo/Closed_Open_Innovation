@@ -38,7 +38,11 @@ public class CheckLandscape {
             BufferedWriter bw = new BufferedWriter(new FileWriter("MaxMin.csv", true));
             String max_str = Arrays.toString(max), min_str = Arrays.toString(min);
             bw.write("Max:\n" + max_str.substring(1, max_str.length()-1)+ "\n");
+<<<<<<< HEAD
             bw.write("Min:\n" + min_str.substring(1, min_str.length()-1) + "\n");
+=======
+            bw.write("Min:\n" + max_str.substring(1, max_str.length()-1) + "\n");
+>>>>>>> ac9adcc6c3cc72bb93d4f0e72ebc3c7d1a881a61
             bw.flush();
             bw.close();
         } catch (IOException e) {
