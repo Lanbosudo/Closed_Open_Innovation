@@ -14,8 +14,8 @@ public class ClosedInnovation {
             Global.newInteractLst(interactionNo);
             for (int contributionNo = 0; contributionNo < contributionNum; contributionNo ++) {
                 Global.newContributionLst(contributionNo);
-                //if (landscapeNo%10 == 0)//debug
-                //System.out.println("landscape "+landscapeNo + " begins.");
+                if ((interactionNo*contributionNum + contributionNo)%10 == 0)//debug
+                    System.out.println("landscape "+ interactionNo*contributionNum + contributionNo + " begins.");
 
                 Firms[] closedFirms = new Firms [firmsNum];
                 //initial firms

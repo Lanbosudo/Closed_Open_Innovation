@@ -12,8 +12,8 @@ public class OpenInnovationFixed extends ClosedInnovation {
             for (int contributionNo = 0; contributionNo < contributionNum; contributionNo ++) {
                 Global.newContributionLst(contributionNo);
 
-                //if (landscapeNo%10 == 0)//debug
-                //System.out.println("landscape "+landscapeNo + " begins.");
+                if ((interactionNo*contributionNum + contributionNo)%10 == 0)//debug
+                    System.out.println("landscape "+ interactionNo*contributionNum + contributionNo + " begins.");
 
                 //divide two groups
                 Random rand = new Random();
