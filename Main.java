@@ -3,9 +3,9 @@ import java.util.*;
 public class Main {
     public static void main (String[] args) {
 
-        /*System.out.println("select mode: (1)Closed (2)Open Fixed (3)Open Flexible");
-        Scanner reader = new Scanner(System.in);
-        int mode = reader.nextInt();*/
+        /*select mode: (1)Closed (2)Open Fixed (3)Open Flexible
+          params: K, contributionNum, interactionNum
+        */
         int mode = Integer.parseInt(args[0]);
 
         Global global = new Global(args[1], args[2], args[3]);

@@ -4,8 +4,9 @@ import java.io.*;
 
 public class ClosedInnovation {
 
-    public  double[] performanceList = new double[Global.contributionNum * Global.interactionNum];
+    public double[] performanceList = new double[Global.contributionNum * Global.interactionNum];
     public String FileName = "Closed_Data";
+    public double ratio = 0.5;
     
     public void begin () {
         int N = Global.N, K = Global.K, firmsNum = Global.firmsNum;
@@ -59,17 +60,21 @@ public class ClosedInnovation {
                     //System.out.println(++count + " loops."); //debug
                 } while (firmsChgd == 1);
 
+                //for each landscape, only need top $ratio firms
                 double performanceSum = 0;
-                for (Firms closedFirm: closedFirms) {
-                    performanceSum += closedFirm.WTP;
+                double []performanceArray = new double [firmsNum];
+
+                for (int i_firm = 0; i_firm < firmsNum; i_firm++) {
+                    performanceArray[i_firm] = closedFirms[i_firm].WTP;
                 }
-                performanceList[interactionNo*contributionNum+contributionNo] = performanceSum/firmsNum;
+                Arrays.sort(performanceArray);
+                for (int i_sum = (int) (firmsNum * ratio)-1; i_sum >= 0; i_sum--) {
+                    performanceSum += performanceArray[firmsNum-1 - i_sum];
+                }
+                
+                performanceList[interactionNo*contributionNum+contributionNo] = performanceSum/((int)(firmsNum*ratio));
             }
         }
-        //System.out.println(Arrays.toString(performanceList));
-        
-        //File f = new File(FileName);
-        //if (f.exists() && !f.isDirectory()) {
         writeResult(FileName);
     }
     

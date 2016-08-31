@@ -69,14 +69,24 @@ public class OpenInnovationFlexible extends OpenInnovationFixed {
                 } while (firmsChgd == 1 && count < 200);
 
                 double performanceSum = 0;
-                for (Firms_alpha openFirm_alpha: openFirms_alpha)
-                    performanceSum += openFirm_alpha.WTP;
-                for (Firms_beta openFirm_beta: openFirms_beta)
-                    performanceSum += openFirm_beta.WTP;
-                performanceList[interactionNo*contributionNum+contributionNo] = performanceSum/firmsNum;
+                double []performanceArray = new double [firmsNum];
+
+                for (int i_firm = 0; i_firm < alphaNum; i_firm++) {
+                    performanceArray[i_firm] = openFirms_alpha[i_firm].WTP;
+                }
+                for (int i_firm = alphaNum; i_firm < firmsNum; i_firm++) {
+                    performanceArray[i_firm] = openFirms_beta[i_firm-alphaNum].WTP;
+                }
+
+                Arrays.sort(performanceArray);
+                for (int i_sum = (int) (firmsNum * ratio)-1; i_sum >= 0; i_sum--) {
+                    performanceSum += performanceArray[firmsNum-1 - i_sum];
+                }
+                
+                performanceList[interactionNo*contributionNum+contributionNo] = performanceSum/((int)(firmsNum*ratio));
+
             }
         }        
-        //System.out.println(Arrays.toString(performanceList));
         writeResult(FileName);
     }
 }
