@@ -18,7 +18,7 @@ public class Firms_beta extends Firms_alpha {
     }
 
     public int findValue (int i) {
-        return i >= 8? featureLst[i-8]: partner.featureLst[i];
+        return i >= Global.N/2? featureLst[i-Global.N/2]: partner.featureLst[i];
     }
     
     public void searchPartner() {

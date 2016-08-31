@@ -32,7 +32,7 @@ public class Firms_alpha extends Firms {
     }
 
     public int findValue (int i) {
-        return i < 8? featureLst[i]: partner.featureLst[i-8];
+        return i < Global.N/2? featureLst[i]: partner.featureLst[i-Global.N/2];
     }
     public void revertBit(int i) {
         if (featureLst[i] == 1) featureLst[i] = 0;
