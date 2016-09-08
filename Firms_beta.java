@@ -23,9 +23,10 @@ public class Firms_beta extends Firms_alpha {
     
     public void searchPartner() {
         Firms_alpha oldPartner = partner;
+        double oldWTP = WTP;
         for (Firms_alpha newPartner: partnerLst) {
-            partner = newPartner; double newWTP = calcWTP();
-            if (WTP >= newWTP) { partner = oldPartner;}
+            partner = newPartner; WTP = calcWTP();
+            if (oldWTP >= WTP) { partner = oldPartner; WTP = oldWTP;}
         }
     }
 }

@@ -37,8 +37,10 @@ public class Global {
                 do {
                     sameFlag = 0;
                     tmp = rand.nextInt(N);
+                    if (tmp == i)
+                        sameFlag = 1;
                     for (int k = 0; k < j; k ++) {
-                        if (intrctList_item[k] == tmp || tmp == i) {
+                        if (intrctList_item[k] == tmp) {
                             sameFlag = 1; break; }
                     }
                 } while (sameFlag == 1);
