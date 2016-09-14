@@ -1,5 +1,6 @@
 import java.util.*;
 //import java.util.stream.*;
+import java.io.*;
 
 public class OpenInnovationFlexible extends OpenInnovationFixed {
     public String FileName = "Flexible_Data";
@@ -36,8 +37,10 @@ public class OpenInnovationFlexible extends OpenInnovationFixed {
                 }
 
                 int firmsChgd; int count = 0;
+                double avg = 0;
                 do {
                     firmsChgd = 0;
+                    avg = 0;
                     for (Firms_alpha openFirm_alpha: openFirms_alpha) {
                         openFirm_alpha.searchPartner();
                         openFirm_alpha.search();
@@ -59,13 +62,25 @@ public class OpenInnovationFlexible extends OpenInnovationFixed {
                     }
                     for (Firms_alpha openFirm_alpha: openFirms_alpha) {
                         openFirm_alpha.performanceCalc();
+                        avg += openFirm_alpha.WTP;
                     }
                     for (Firms_beta openFirm_beta: openFirms_beta) {
                         openFirm_beta.performanceCalc();
+                        avg += openFirm_beta.WTP;
                     }
                     //if (++ count % 100 == 0) //debug
                     //System.out.println(count + " loops."); //debug
                     count ++;
+
+                    try {
+                        BufferedWriter bw = new BufferedWriter(new FileWriter(FileName + ".csv", true));
+                        bw.write(avg/firmsNum + ",");
+                        bw.flush();
+                        bw.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 } while (firmsChgd == 1 && count < 200);
 
                 double performanceSum = 0;

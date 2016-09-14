@@ -27,6 +27,9 @@ public class Firms_beta extends Firms_alpha {
         for (Firms_alpha newPartner: partnerLst) {
             partner = newPartner; WTP = calcWTP();
             if (oldWTP >= WTP) { partner = oldPartner; WTP = oldWTP;}
+
+            //bug
+            oldPartner = partner; oldWTP = WTP;
         }
     }
 }

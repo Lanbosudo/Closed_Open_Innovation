@@ -1,5 +1,6 @@
 import java.util.*;
 //import java.util.stream.*;
+import java.io.*;
 
 public class OpenInnovationFixed extends ClosedInnovation {
     public String FileName = "Fixed_Data";
@@ -62,8 +63,10 @@ public class OpenInnovationFixed extends ClosedInnovation {
                   System.out.println("3 contributionLst: " + ClosedInnovation.contributionLst[0][0] + ' '+OpenInnovationFixed.contributionLst[0][0] + ' '+OpenInnovationFlexible.contributionLst[0][0]);*/
 
                 int firmsChgd; int count = 0;
+                double avg = 0;
                 do {
                     firmsChgd = 0;
+                    avg = 0;
                     for (Firms_alpha openFirm_alpha: openFirms_alpha) {
                         openFirm_alpha.search();
                         if (firmsChgd == 0 && openFirm_alpha.newPlanFnd == 1)
@@ -84,14 +87,27 @@ public class OpenInnovationFixed extends ClosedInnovation {
                     }
                     for (Firms_alpha openFirm_alpha: openFirms_alpha) {
                         openFirm_alpha.performanceCalc();
+                        avg += openFirm_alpha.WTP;
                     }
                     //System.out.println("after: "+openFirms_alpha[0].WTP); //debug
                     for (Firms_beta openFirm_beta: openFirms_beta) {
                         openFirm_beta.performanceCalc();
+                        avg += openFirm_beta.WTP;
                     }
                     //if (++ count % 100 == 0) //debug
                     //System.out.println(++count + " loops."); //debug
                     count ++;
+
+                    try {
+                        BufferedWriter bw = new BufferedWriter(new FileWriter(FileName + ".csv", true));
+                        bw.write(avg/firmsNum + ",");
+                        bw.flush();
+                        bw.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
                 } while (firmsChgd == 1 && count < 200);
 
                 double performanceSum = 0;
