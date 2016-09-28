@@ -8,7 +8,7 @@ public class Main {
         int mode = reader.nextInt();*/
         int mode = Integer.parseInt(args[0]);
 
-        Global global = new Global(args[1], args[2], args[3]);
+        Global global = new Global(args[1], args[2], args[3], args[4]);
         if (mode == 1) {
             ClosedInnovation closedInnovation = new ClosedInnovation();
             closedInnovation.begin();

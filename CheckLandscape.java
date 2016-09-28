@@ -3,7 +3,7 @@ import java.io.*;
 
 public class CheckLandscape {
     public static void main (String[] args) {
-        Global global = new Global(args[0], args[1], args[2]);
+        Global global = new Global(args[0], args[1], args[2], args[3]);
         int contributionNum = Global.contributionNum, interactionNum = Global.interactionNum;
         
         Firms oneFirm = new Firms();

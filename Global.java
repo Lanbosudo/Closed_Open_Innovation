@@ -10,12 +10,14 @@ public class Global {
     //number of landscapes
     public static int contributionNum = 0;
     public static int interactionNum = 0;
+    public static int roundNum = 0;
 
-    public Global (String param1, String param2, String param3) {
+    public Global (String param1, String param2, String param3, String param4) {
 
         K = Integer.parseInt(param1);
         contributionNum = Integer.parseInt(param2);
         interactionNum = Integer.parseInt(param3);
+        roundNum = Integer.parseInt(param4);
     }
 
     public static void newInteractLst(int rank) {
@@ -63,6 +65,7 @@ public class Global {
             //random
             for (int j = 0; j < (Math.pow(2, K+1)); j ++) {
                 contributionLst_item[j] = rand.nextDouble();
+                //contributionLst_item[j] = (rand.nextInt(10)+1)*0.1;
             }
             contributionLst[i] = contributionLst_item;
         }
