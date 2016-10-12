@@ -5,12 +5,16 @@ public class Firms_alpha extends Firms {
     public Firms_beta partner;
     public Firms_beta[] partnerLst;
 
-    public void initial(Firms_beta[] openFirms_beta, int partnerNum) {
+    public Firms_alpha() {
         Random rand = new Random();
         int N = Global.N;
         for (int i = 0; i < N/2; i ++) {
             featureLst[i] = rand.nextInt(2);
-        }
+        }        
+    }
+
+    public void initial(Firms_beta[] openFirms_beta, int partnerNum) {
+
         //System.out.println(Arrays.toString(featureLst)); //debug
         
         partnerLst = openFirms_beta;

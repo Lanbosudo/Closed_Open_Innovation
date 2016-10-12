@@ -5,11 +5,7 @@ public class Firms_beta extends Firms_alpha {
     public Firms_alpha[] partnerLst;
 
     public void initial(Firms_alpha[] openFirms_alpha, int partnerNum) {
-        Random rand = new Random();
-        int N = Global.N;
-        for (int i = 0; i < N/2; i ++) {
-            featureLst[i] = rand.nextInt(2);
-        }
+
         //System.out.println(Arrays.toString(featureLst)); //debug
 
         partnerLst = openFirms_alpha;
